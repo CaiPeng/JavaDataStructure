@@ -15,6 +15,8 @@ Java实现基本数据结构
     
 ### LinkedList
 
+   - LinkedList
    - LinkedListStack
+   - LinkedListQueue
 
    
