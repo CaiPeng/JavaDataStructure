@@ -74,7 +74,7 @@ public class LinkedList<E> {
      * <p>
      * O(n/2)
      */
-    private void add(int index, E e) {
+    public void add(int index, E e) {
         if (index < 0 && index > size) {
             throw new IllegalArgumentException("Index Illegal");
         }
@@ -99,7 +99,7 @@ public class LinkedList<E> {
      * <p>
      * O(1)
      */
-    private void addFirst(E e) {
+    public void addFirst(E e) {
 //        Node node = new Node(e);
 //        node.next = head;
 //        head = node;
@@ -114,7 +114,7 @@ public class LinkedList<E> {
      * <p>
      * O(n)
      */
-    private void addLast(E e) {
+    public void addLast(E e) {
         add(size, e);
     }
 
@@ -144,16 +144,16 @@ public class LinkedList<E> {
      * <p>
      * O(1)
      */
-    public void removeFirst() {
-        remove(0);
+    public E removeFirst() {
+        return remove(0);
     }
 
     /**
      * Remove Last
      * O(n)
      */
-    public void removeLast() {
-        remove(size);
+    public E removeLast() {
+        return remove(size);
     }
 
     /**
