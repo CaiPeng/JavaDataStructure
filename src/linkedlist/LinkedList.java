@@ -14,8 +14,6 @@ package linkedlist;
  * 链表：
  * 不适合索引有语意的情况
  * 最大优点：动态
- *
- *
  */
 public class LinkedList<E> {
 
@@ -46,8 +44,13 @@ public class LinkedList<E> {
         }
     }
 
+    /**
+     * 头部指针
+     */
     private Node dummyHead;
+
     //    private Node head;
+
     private int size;
 
     public LinkedList() {
