@@ -155,7 +155,7 @@ public class DynamicArray<E> {
      * @return
      */
     public E removeLast() {
-        return remove(size);
+        return remove(size-1);
     }
 
     /**
