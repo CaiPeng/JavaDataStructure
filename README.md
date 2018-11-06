@@ -1,18 +1,20 @@
 # JavaDataStructure
 
-手写基本数据结构
+Java实现基本数据结构
 
-- array
+### Array
 
-- queue
+### Queue
 
-    - 队列
-    - 循环队列
+  - 队列（数组实现）
+  - 循环队列（数组实现）
     
-- stack
+### Stack
     
-    数据实现栈
+   - 数组实现
     
-- linkedlist
+### LinkedList
+
+   - LinkedListStack
 
    
