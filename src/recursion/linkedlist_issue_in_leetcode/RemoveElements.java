@@ -56,5 +56,21 @@ public class RemoveElements {
 
     }
 
+    /**
+     * 递归
+     */
+    public ListNode removeElementsV3(ListNode head, int val) {
+        if (head == null) {
+            return null;
+        }
+        ListNode result = removeElementsV3(head.next, val);
+        if (head.val == val) {
+            return result;
+        } else {
+            head.next = result;
+            return head;
+        }
+    }
+
 
 }
