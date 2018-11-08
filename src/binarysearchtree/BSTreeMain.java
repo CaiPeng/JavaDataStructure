@@ -13,9 +13,9 @@ public class BSTreeMain {
 //        bsTree.preOrder();
 //        bsTree.preOrderV2();
 
-        bsTree.levelOrder();
+        Integer integer = bsTree.max();
 
-//        System.out.println(bsTree.toString());
+        System.out.println(integer);
 
     }
 }
