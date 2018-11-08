@@ -1,5 +1,9 @@
 package binarysearchtree;
 
+import apple.laf.JRSUIUtils;
+
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -191,6 +195,25 @@ public class BSTree<E extends Comparable<E>> {
         System.out.println(node.e);  //访问节点
     }
 
+    /**
+     * 层序遍历 借助队列
+     * <p>
+     * 算法设计 最短路径
+     */
+    public void levelOrder() {
+        Queue<TreeNode> nodeQueue = new LinkedList<>();
+        nodeQueue.add(root);
+        while (!nodeQueue.isEmpty()) {
+            TreeNode cur = nodeQueue.remove();
+            System.out.println(cur.e);  //访问节点
+            if (cur.left != null) {
+                nodeQueue.add(cur.left);
+            }
+            if (cur.right != null) {
+                nodeQueue.add(cur.right);
+            }
+        }
+    }
 
     @Override
     public String toString() {
