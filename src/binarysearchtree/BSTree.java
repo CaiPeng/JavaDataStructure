@@ -94,4 +94,108 @@ public class BSTree<E extends Comparable<E>> {
         return node;
     }
 
+    /**
+     * 查询元素
+     */
+    public boolean contains(E e) {
+        return contains(root, e);
+    }
+
+    private boolean contains(TreeNode node, E e) {
+        if (node == null) {
+            return false;
+        }
+        if (e.compareTo(node.e) == 0) {
+            return true;
+        } else if (e.compareTo(node.e) < 0) {
+            return contains(node.left, e);
+        } else /*if (e.compareTo(node.e) > 0)*/ {
+            return contains(node.right, e);
+        }
+    }
+
+    /**
+     * 前序遍历 先访问节点 后访问左右子树
+     */
+    public void preOrder() {
+        preOrder(root);
+    }
+
+    //前序遍历 以Node 为根节点 先访问节点 后访问左右子树
+    private void preOrder(TreeNode node) {
+        if (node == null) { //递归终止条件
+            return;
+        }
+        System.out.println(node.e);  //访问节点
+        preOrder(node.left);//左子树
+        preOrder(node.right);//右子树
+    }
+
+    /**
+     * 中序遍历 先访问节点的左子树，再访问节点的右子树,再访问节点，
+     * <p>
+     * 调用排序的位置
+     */
+    public void inOrder() {
+        inOrder(root);
+    }
+
+    private void inOrder(TreeNode node) {
+        if (node == null) { //递归终止条件
+            return;
+        }
+        inOrder(node.left);
+        System.out.println(node.e);  //访问节点
+        inOrder(node.right);
+    }
+
+    /**
+     * 后序遍历 先访问节点的右子树，再访问节点，在访问节点的左子树
+     * <p>
+     * 调用排序的位置
+     * <p>
+     * 应用场景：内存释放
+     */
+    public void postOrder() {
+        postOrder(root);
+    }
+
+    private void postOrder(TreeNode node) {
+        if (node == null) {
+            return;
+        }
+        postOrder(node.left);
+        postOrder(node.right);
+        System.out.println(node.e);  //访问节点
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        generateBSTreeString(root, 0, builder);
+        return builder.toString();
+    }
+
+    //生成以Node为根节点，深度为depth的描述的二叉树的字符串 前序遍历
+    private void generateBSTreeString(TreeNode node, int depth, StringBuilder builder) {
+        if (node == null) {
+            builder.append(generateDepthString(depth) + "NULL\n");
+            return;
+        }
+        builder.append(generateDepthString(depth) + node.e + "\n");
+        generateBSTreeString(node.left, depth + 1, builder);
+        generateBSTreeString(node.right, depth + 1, builder);
+    }
+
+    //深度为depth的描述
+    private String generateDepthString(int depth) {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < depth; i++) {
+            builder.append("--");
+        }
+        return builder.toString();
+    }
+
+
 }
