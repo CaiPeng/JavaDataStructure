@@ -10,7 +10,8 @@ public class BSTreeMain {
         }
 //        bsTree.inOrder();
 
-        bsTree.postOrder();
+        bsTree.preOrder();
+        bsTree.preOrderV2();
 //        System.out.println(bsTree.toString());
 
     }

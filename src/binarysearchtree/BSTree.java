@@ -1,5 +1,7 @@
 package binarysearchtree;
 
+import java.util.Stack;
+
 /**
  * 二分搜索树 （left < root,right > root）
  * <p>
@@ -129,6 +131,26 @@ public class BSTree<E extends Comparable<E>> {
         System.out.println(node.e);  //访问节点
         preOrder(node.left);//左子树
         preOrder(node.right);//右子树
+    }
+
+    /**
+     * 非递归写法  借助栈（后进先出）的概念
+     * <p>
+     * NONE RECURSION
+     */
+    public void preOrderV2() {
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);//根节点压栈
+        while (!stack.isEmpty()) {
+            TreeNode cur = stack.pop(); //出栈
+            System.out.println(cur.e);  //访问节点
+            if (cur.right != null) {
+                stack.push(cur.right); //右子树压栈
+            }
+            if (cur.left != null) {
+                stack.push(cur.left);//左子树压栈
+            }
+        }
     }
 
     /**
