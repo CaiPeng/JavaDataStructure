@@ -71,10 +71,27 @@ public class BSTree<E extends Comparable<E>> {
     }
 
     /**
-     * 非递归
+     * 相等元素，相当于已经存在于二分搜索树中，不包括重复的
      */
-    private void addV2(TreeNode node, E e) {
+    public void addV2(E e) {
+        root = addV2(root, e);
+    }
 
+    /**
+     * 递归
+     * 返回插入新节点的二分搜索树的根
+     */
+    private TreeNode addV2(TreeNode node, E e) {
+        if (node == null) {
+            size++;
+            return new TreeNode(e);
+        }
+        if (e.compareTo(node.e) < 0) {
+            node.left = addV2(node.left, e);
+        } else if (e.compareTo(node.e) > 0) {
+            node.right = addV2(node.right, e);
+        }
+        return node;
     }
 
 }
