@@ -18,5 +18,11 @@ Java实现基本数据结构
    - LinkedList
    - LinkedListStack
    - LinkedListQueue
+   
+### BinarySearchTree
+
+  - preOrder() 前序遍历
+  - inOrder() 中序遍历
+  - postOrder() 后序遍历
 
    
