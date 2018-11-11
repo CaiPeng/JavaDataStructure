@@ -24,5 +24,14 @@ Java实现基本数据结构
   - preOrder() 前序遍历
   - inOrder() 中序遍历
   - postOrder() 后序遍历
+  
+### Heap
+
+   - MaxHeap(底层用动态数组)
+   
+### PriorityQueue
+
+   - 底层MaxHeap
+
 
    
