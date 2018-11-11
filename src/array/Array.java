@@ -108,7 +108,7 @@ public class Array<E> {
         data[size] = null;
 
         if (size == data.length / 2) {
-            
+
         }
         return ret;
     }

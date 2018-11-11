@@ -38,6 +38,14 @@ public class DynamicArray<E> {
         this(10);
     }
 
+    public DynamicArray(E[] eArray) {
+        data = (E[]) new Object[eArray.length];
+        for (int i = 0; i < eArray.length; i++) {
+            data[i] = eArray[i];
+        }
+        size = eArray.length;
+    }
+
     /**
      * @return 数组长度
      */
@@ -155,7 +163,7 @@ public class DynamicArray<E> {
      * @return
      */
     public E removeLast() {
-        return remove(size-1);
+        return remove(size - 1);
     }
 
     /**
@@ -239,6 +247,18 @@ public class DynamicArray<E> {
             }
         }
         return -1;
+    }
+
+    /**
+     * 交换
+     */
+    public void swap(int i, int j) {
+        if (i < 0 || i >= size || j < 0 || j >= size) {
+            throw new IllegalArgumentException("Index is illegal");
+        }
+        E temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
     }
 
     @Override
