@@ -53,9 +53,6 @@ public class LinkedListMain {
 
             l3.next = node;
         }
-
-        System.out.println("ArrayStackTime " + sum);
-
         return l3.next;
     }
 

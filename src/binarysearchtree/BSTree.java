@@ -9,6 +9,8 @@ import java.util.Stack;
  * 二分搜索树 （left < root,right > root）
  * <p>
  * 如果相等的话可以定义 left<= root 或者 right>=root
+ * <p>
+ * 本次实现不包括重复元素
  *
  * @param <E> 泛型必须具有可比较性
  */
@@ -187,7 +189,7 @@ public class BSTree<E extends Comparable<E>> {
 
     private TreeNode removeMax(TreeNode node) {
         if (node.right == null) {
-            TreeNode leftNode = node.left;
+            TreeNode leftNode =   node.left;
             node.left = null;
             size--;
             return leftNode;
@@ -257,7 +259,7 @@ public class BSTree<E extends Comparable<E>> {
             TreeNode successor = minimum(node.right);
             successor.right = removeMin(node.right);
             successor.left = node.left;
-            node.left = node.right =null;
+            node.left = node.right = null;
             return successor;
         }
     }
