@@ -74,7 +74,26 @@ Java实现基本数据结构
 
 - 链表 LinkedMap<K,V>
 
+    复杂度：
+     - add          O(N)
+     - remove       O(N)
+     - set          O(N)
+     - get          O(N)
+     - contains     O(N)
+
 - 二分搜索树 BSTreeMap<K,V>
+
+    复杂度：
+    - add           O(logN)
+    - remove        O(logN)
+    - set           O(logN)
+    - get           O(logN)
+    - contains      O(logN)
+
+- **NOTE** 集合映射关系
+
+    - 基于Map 包装 Set 
+
 
 
 
