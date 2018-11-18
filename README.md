@@ -74,7 +74,7 @@ Java实现基本数据结构
 
 - 链表 LinkedMap<K,V>
 
-- 二份搜索树 BSTreeMap<K,V>
+- 二分搜索树 BSTreeMap<K,V>
 
 
 
