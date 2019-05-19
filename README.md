@@ -117,9 +117,9 @@ Java实现基本数据结构
 - 对于一组数据，主要支持两个动作
     
     - union(p,q) 合并
-    - isConnected(p,q) 查询两个数据是否属于同一个集合
+    - isConnected(p,q) 查询两个数据是否属于同一个集合 -->find(p) == find(q) 
 
-    
+- Quick Find 时间复杂度O（1）  
 
 
 

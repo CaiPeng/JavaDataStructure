@@ -1,6 +1,6 @@
 package unionFind;
 
-public interface IUnionFInd {
+public interface IUnionFind {
 
     /**
      * 两个元素是否所属同一个集合
