@@ -109,9 +109,7 @@ Java实现基本数据结构
     - 区间查询
    
         基于区间的统计查询
-
-    
-    
+   
 ### 并查集（Union Find）
 
 - 对于一组数据，主要支持两个动作
@@ -119,7 +117,34 @@ Java实现基本数据结构
     - union(p,q) 合并
     - isConnected(p,q) 查询两个数据是否属于同一个集合 -->find(p) == find(q) 
 
-- Quick Find 时间复杂度O（1）  
+- Quick Find 时间复杂度O（1）
+ 
+    ![avatar](src/unionFind/img/quick_find_1.png)
+    
+    ![avatar](src/unionFind/img/quick_find_2.png)
+    
+    ![avatar](src/unionFind/img/quick_find_3.png)
+    
+- Quick Union
+
+   - 将每个元素，看作是一个节点
+   
+   ![avatar](src/unionFind/img/quick_union_1.png)
+   
+   ![avatar](src/unionFind/img/quick_union_2.png)
+   
+   ![avatar](src/unionFind/img/quick_union_3.png)
+   
+   ![avatar](src/unionFind/img/quick_union_4.png)
+   
+   ![avatar](src/unionFind/img/quick_union_5.png)
+   
+   > 1. 将 7 和 2 合并 ，需将 7 的根节点指向 2
+   > 2. 将 7 和 3 合并 ，需将 7 的根节点指向 3 的根节点，结果同上
+   > 每个节点本身只有一个指针，只会指向另外一个元素
+   
+  
+   
 
 
 
