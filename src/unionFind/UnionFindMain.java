@@ -32,13 +32,19 @@ public class UnionFindMain {
     }
 
     public static void main(String[] args) {
-        int size = 100000;
-        int m = 10000;
+        int size = 10000000;
+        int m = 10000000;
 
-        UnionFindOne uf1 = new UnionFindOne(size);
-        System.out.println("UnionFindOne : " + testUF(uf1, m) + " s");
+//        UnionFindOne uf1 = new UnionFindOne(size);
+//        System.out.println("UnionFindOne : " + testUF(uf1, m) + " s");
+//
+//        UnionFindTwo uf2 = new UnionFindTwo(size);
+//        System.out.println("UnionFindTwo : " + testUF(uf2, m) + " s");
 
-        UnionFindTwo uf2 = new UnionFindTwo(size);
-        System.out.println("UnionFindTwo : " + testUF(uf2, m) + " s");
+        UnionFindThird uf3 = new UnionFindThird(size);
+        System.out.println("UnionFindThird : " + testUF(uf3, m) + " s");
+
+        UnionFindFour uf4 = new UnionFindFour(size);
+        System.out.println("UnionFindFour : " + testUF(uf4, m) + " s");
     }
 }
