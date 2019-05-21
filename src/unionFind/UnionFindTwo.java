@@ -1,7 +1,7 @@
 package unionFind;
 
 /**
- * Quick Union
+ * Quick Union 同样是数组存储，但是结构是一颗树（森林，孩子指向父亲）：访问地址跳转
  */
 public class UnionFindTwo implements IUnionFind {
 

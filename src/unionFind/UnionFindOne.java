@@ -1,7 +1,7 @@
 package unionFind;
 
 /**
- * Quick Find
+ * Quick Find 数组存储(顺序访问连续一片地址空间)
  * <p>
  * unionElements() --> O(N) 数量较大时候 性能较差
  * isConnected() --> O(1)
