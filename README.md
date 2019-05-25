@@ -161,7 +161,44 @@ Java实现基本数据结构
     - O(log*n) --> iterated logarithm (路径压缩)
         ![avatar](src/unionFind/img/path_compression_2.png)
         近乎 O（1）   
-    - 
+
+### 平衡二叉树 与 AVL树
+
+- 二分搜索树的问题
+      
+      - ISSUE 
+      > 数据顺序添加到二分搜索树，蜕化成链表
+        
+- 平衡二叉树
+    
+    - 满二叉树
+    ![avatar](src/avlTree/img/1.png)
+    > 高度达到最低状态，除了叶子节点，其他节点都有左右两个子树
+    
+    - 完全二叉树
+    ![avatar](src/avlTree/img/2.png)
+    > 把所有的元素按照形状一层一层铺开，最终得到一颗完全二叉树
+    > 有可能有一颗非叶子节点的右子树为空（eg.16节点）
+    > 整棵树的叶子结点最大深度值与最小深度值不超过1
+    
+    - 线段树
+    ![avatar](src/avlTree/img/3.png)
+    > 叶子节点或者在最后一层，或者在倒数第二层
+    > 整棵树的叶子结点最大深度值与最小深度值不超过1
+    
+![avatar](src/avlTree/img/4.png)
+> 对于任意一个节点，左子树和右子树的高度差不能超过1
+> 不会在堆、线段树中出现  
+> 平衡二叉树的高度和节点数量直接的关系也是O(logN)的 
+> 标注节点的高度
+> 计算平衡因子：左右两个子树高度差
+![avatar](src/avlTree/img/5.png)
+
+- AVL树
+
+> Author: G . M . Adelson-Velsky 和 E. M. Landis
+> 1962年提出，最早的自平衡二叉树
+> 对于任意一个节点，左子树和右子树的高度差不能超过1
     
 
 
