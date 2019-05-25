@@ -148,6 +148,21 @@ Java实现基本数据结构
     - Size
     - Rank : 高度
         - rank[i] 表示根节点为i的树的高度
+    - 路径压缩 
+        ![avatar](src/unionFind/img/path_compression_00.png)
+        
+        ![avatar](src/unionFind/img/path_compression_0.png)
+        
+        ![avatar](src/unionFind/img/path_compression_1.png)
+        
+- 并查集的时间复杂度分析
+
+    - O(h)
+    - O(log*n) --> iterated logarithm (路径压缩)
+        ![avatar](src/unionFind/img/path_compression_2.png)
+        近乎 O（1）   
+    - 
+    
 
 
 

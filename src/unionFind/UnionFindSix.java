@@ -1,10 +1,10 @@
 package unionFind;
 
 /**
- * 基于 UnionFindTwo 的优化
- * 考虑Size:  基于每棵树的大小进行优化
+ * 基于 UnionFindFFive 的优化
+ * 路径压缩
  */
-public class UnionFindThird implements IUnionFind {
+public class UnionFindSix implements IUnionFind {
 
     /**
      * parent[i] 代表第i 个元素指向哪个节点
@@ -12,16 +12,16 @@ public class UnionFindThird implements IUnionFind {
     private int[] parent;
 
     /**
-     * size[i] 表示以i为根的集合中元素个数
+     * rank[i] 表示以i为根的集合中树的层数
      */
-    private int[] size;
+    private int[] rank;
 
-    public UnionFindThird(int length) {
+    public UnionFindSix(int length) {
         parent = new int[length];
-        size = new int[length];
+        rank = new int[length];
         for (int i = 0; i < length; i++) {
             parent[i] = i; // 初始时候每一个节点指向它自己，相当于每一个节点独立的是一棵树
-            size[i] = 1; // 初始化时每一个元素自己独立成为一个集合，自己的集合中只有一个元素
+            rank[i] = 1; // 初始化时每一个元素自己独立成为一个集合，自己的集合中只有一个元素
         }
     }
 
@@ -47,13 +47,16 @@ public class UnionFindThird implements IUnionFind {
             return;
         }
         // 根据两个元素所在树的元素个数不同判断合并方向
-        // 将元素小的集合合并到元素个数多的集合上
-        if (size[pRoot] < size[qRoot]) {  // pRoot 树节点相对 qRoot 节点较少
-            parent[pRoot] = qRoot; // 否则直接让pRoot 指向 qRoot,即qRoot是pRoot 的根节点
-            size[qRoot] += size[pRoot]; // 维护size数组的值，pRoot 的值更大了，增加了原来pRoot
+        // 将高度低的集合合并到高度高的集合上
+        if (rank[pRoot] < rank[qRoot]) {  // pRoot 树深度相对 qRoot 深度较低
+            parent[pRoot] = qRoot;        // 否则直接让pRoot 指向 qRoot,即qRoot是pRoot 的根节点
+            // 合并之后qRoot高度无变化, 不需要维护rank
+        } else if (rank[pRoot] > rank[qRoot]) {
+            parent[qRoot] = pRoot;
+            // 合并之后qRoot高度无变化, 不需要维护rank
         } else {
             parent[qRoot] = pRoot;
-            size[pRoot] += size[qRoot];
+            rank[pRoot] += 1;
         }
     }
 
@@ -67,16 +70,15 @@ public class UnionFindThird implements IUnionFind {
      * 时间复杂度 O(h),h为树的高度
      *
      * @param p 元素
-     * @return p 根节点集合编号
+     * @return p p的根节点集合编号
      */
     private int find(int p) {
         if (p < 0 && p >= parent.length) {
             throw new IllegalArgumentException("p is out of bound.");
         }
-        // 思路 从当前节点不断的去向它的根节点查找，直到 p == parent[p]
-        while (p != parent[p]) { //  代表p 不是根节点 就查找
-            p = parent[p];
+        if (p != parent[p]) { // p非根节点
+            parent[p] = find(parent[p]); //p的父亲节点对应的根节点
         }
-        return p;
+        return parent[p];
     }
 }

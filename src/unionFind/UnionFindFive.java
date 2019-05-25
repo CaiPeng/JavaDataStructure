@@ -1,10 +1,10 @@
 package unionFind;
 
 /**
- * 基于 UnionFindThree 的优化
- * 考虑Rank:  基于每棵树的大小进行优化
+ * 基于 UnionFindFour 的优化
+ * 路径压缩
  */
-public class UnionFindFour implements IUnionFind {
+public class UnionFindFive implements IUnionFind {
 
     /**
      * parent[i] 代表第i 个元素指向哪个节点
@@ -16,7 +16,7 @@ public class UnionFindFour implements IUnionFind {
      */
     private int[] rank;
 
-    public UnionFindFour(int length) {
+    public UnionFindFive(int length) {
         parent = new int[length];
         rank = new int[length];
         for (int i = 0; i < length; i++) {
@@ -78,7 +78,8 @@ public class UnionFindFour implements IUnionFind {
         }
         // 思路 从当前节点不断的去向它的根节点查找，直到 p == parent[p]
         while (p != parent[p]) { //  代表p 不是根节点 就查找
-            p = parent[p];
+            parent[p] = parent[parent[p]]; // 当前节点父节点指向 父亲的父亲节点
+            p = parent[p];  // 当前节点指向父节点
         }
         return p;
     }

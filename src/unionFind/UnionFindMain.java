@@ -41,10 +41,16 @@ public class UnionFindMain {
 //        UnionFindTwo uf2 = new UnionFindTwo(size);
 //        System.out.println("UnionFindTwo : " + testUF(uf2, m) + " s");
 
-        UnionFindThird uf3 = new UnionFindThird(size);
-        System.out.println("UnionFindThird : " + testUF(uf3, m) + " s");
+        UnionFindThree uf3 = new UnionFindThree(size);
+        System.out.println("UnionFindThree : " + testUF(uf3, m) + " s");
 
         UnionFindFour uf4 = new UnionFindFour(size);
         System.out.println("UnionFindFour : " + testUF(uf4, m) + " s");
+
+        UnionFindFive uf5 = new UnionFindFive(size);
+        System.out.println("UnionFindFive : " + testUF(uf5, m) + " s");
+
+        UnionFindSix uf6 = new UnionFindSix(size); // 递归时间消耗相对大，空间开销大
+        System.out.println("UnionFindFive : " + testUF(uf6, m) + " s");
     }
 }
