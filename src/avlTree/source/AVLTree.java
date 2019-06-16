@@ -241,21 +241,6 @@ public class AVLTree<K extends Comparable<K>, V> {
         return minimum(node.left);
     }
 
-    // 删除掉以node为根的二分搜索树中的最小节点
-    // 返回删除节点后新的二分搜索树的根
-    private Node removeMin(Node node) {
-
-        if (node.left == null) {
-            Node rightNode = node.right;
-            node.right = null;
-            size--;
-            return rightNode;
-        }
-
-        node.left = removeMin(node.left);
-        return node;
-    }
-
     // 从二分搜索树中删除键为key的节点
     public V remove(K key) {
 
@@ -371,6 +356,12 @@ public class AVLTree<K extends Comparable<K>, V> {
             System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
             System.out.println("is BST " + map.isBSTree());
             System.out.println("is Balanced " + map.isBalanced());
+
+            for(String word: words) {
+                map.remove(word);
+                if (!map.isBSTree() || !map.isBalanced())
+                    throw new RuntimeException();
+            }
         }
 
         System.out.println();
