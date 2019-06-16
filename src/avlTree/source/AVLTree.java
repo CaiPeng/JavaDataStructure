@@ -116,12 +116,10 @@ public class AVLTree<K extends Comparable<K>, V> {
     // 向以node为根的二分搜索树中插入元素(key, value)，递归算法
     // 返回插入新节点后二分搜索树的根
     private Node add(Node node, K key, V value) {
-
         if (node == null) {
             size++;
             return new Node(key, value);
         }
-
         if (key.compareTo(node.key) < 0)
             node.left = add(node.left, key, value);
         else if (key.compareTo(node.key) > 0)
@@ -134,10 +132,63 @@ public class AVLTree<K extends Comparable<K>, V> {
         // 计算平衡因子
         int balanceFactor = getBalanceFactor(node);
         if (Math.abs(balanceFactor) > 1) { // 非平衡二叉树
-            // TODO
             System.out.println("unBalanced : " + balanceFactor);
         }
+        // 平衡维护
+        // a. 平衡因子大于1，&& 左侧的节点多添加了 --> 导致不平衡
+        if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
+            // 右旋转
+            return rightRotate(node);
+        }
+        // b. 平衡因子小于1，&& 右侧的节点多添加了 --> 导致不平衡
+        if (balanceFactor < 1 && getBalanceFactor(node.right) > 0) {
+            // 左旋转
+            return leftRotate(node);
+        }
         return node;
+    }
+
+    // 对节点y进行向右旋转操作，返回旋转后新的根节点x
+    //        y                              x
+    //       / \                           /   \
+    //      x   T4     向右旋转 (y)        z     y
+    //     / \       - - - - - - - ->    / \   / \
+    //    z   T3                       T1  T2 T3 T4
+    //   / \
+    // T1   T2
+    private Node rightRotate(Node y) {
+        Node x = y.left;
+        Node t3 = x.right;
+        // 右旋转
+        x.right = y;
+        y.left = t3;
+        //更新height
+        y.height = Math.max((getHeight(y.left)), (getHeight(y.right))) + 1;
+        x.height = Math.max((getHeight(x.left)), (getHeight(x.right))) + 1;
+        return x;
+    }
+
+    // 对节点y进行向左旋转操作，返回旋转后新的根节点x
+    //    y                             x
+    //  /  \                          /   \
+    // T1   x      向左旋转 (y)       y     z
+    //     / \   - - - - - - - ->   / \   / \
+    //   T2  z                     T1 T2 T3 T4
+    //      / \
+    //     T3 T4
+    private Node leftRotate(Node y) {
+        Node x = y.right;
+        Node T2 = x.left;
+
+        // 向左旋转过程
+        x.left = y;
+        y.right = T2;
+
+        // 更新height
+        y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
+        x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
+
+        return x;
     }
 
     // 返回以node为根节点的二分搜索树中，key所在的节点

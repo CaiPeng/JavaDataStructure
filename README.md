@@ -196,11 +196,20 @@ Java实现基本数据结构
 
 - AVL树
 
-> Author: G . M . Adelson-Velsky 和 E. M. Landis
-> 1962年提出，最早的自平衡二叉树
-> 对于任意一个节点，左子树和右子树的高度差不能超过1
-    
+Author: G . M . Adelson-Velsky 和 E. M. Landis
 
+1962年提出，最早的自平衡二叉树
+
+对于任意一个节点，左子树和右子树的高度差不能超过1   
+    - 什么时候维护平衡
+    ![avatar](src/avlTree/img/6.png) 
+    ![avatar](src/avlTree/img/8.png) 
+    - 平衡因子大于1，&& 左侧的节点多添加了 --> 导致不平衡 --> 右旋转
+    ![avatar](src/avlTree/img/7.png)
+    - 平衡因子小于1，&& 右侧的节点多添加了 --> 导致不平衡 --> 左旋转
+    ![avatar](src/avlTree/img/9.png)
+    
+    
 
 
 
