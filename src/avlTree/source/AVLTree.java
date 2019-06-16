@@ -62,6 +62,28 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     /**
+     * 判断当前树是否是平衡二叉树
+     */
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    /**
+     * 判断以node 为根节点的二叉树是否是一颗平衡二叉树
+     */
+    private boolean isBalanced(Node node) {
+        if (node == null) {
+            return true;
+        }
+        int balanceFactor = getBalanceFactor(node);
+        if (Math.abs(balanceFactor) > 1) {
+            return false;
+        }
+        return isBalanced(node.left) && isBalanced(node.right);
+    }
+
+
+    /**
      * 判断当前树是否为二分搜索树
      * <p>
      * 中序遍历按顺序排列
@@ -246,6 +268,7 @@ public class AVLTree<K extends Comparable<K>, V> {
             System.out.println("Frequency of PRIDE: " + map.get("pride"));
             System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
             System.out.println("is BST " + map.isBSTree());
+            System.out.println("is Balanced " + map.isBalanced());
         }
 
         System.out.println();
