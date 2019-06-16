@@ -58,7 +58,7 @@ public class AVLTree<K extends Comparable<K>, V> {
         if (node == null)
             return 0;
 
-        return getHeight(node.right) - getHeight(node.left);
+        return getHeight(node.left) - getHeight(node.right);
     }
 
     /**
@@ -131,20 +131,28 @@ public class AVLTree<K extends Comparable<K>, V> {
         node.height = 1 + Math.max(getHeight(node.left), getHeight(node.right));
         // 计算平衡因子
         int balanceFactor = getBalanceFactor(node);
-        if (Math.abs(balanceFactor) > 1) { // 非平衡二叉树
-            System.out.println("unBalanced : " + balanceFactor);
-        }
         // 平衡维护
-        // a. 平衡因子大于1，&& 左侧的节点多添加了 --> 导致不平衡
-        if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0) {
-            // 右旋转
+        // a. 平衡因子大于1，&& 节点左侧多添加了 --> 导致不平衡
+        // LL
+        if (balanceFactor > 1 && getBalanceFactor(node.left) >= 0)
+            return rightRotate(node);// 右旋转
+        // b. 平衡因子小于-1，&& 节点右侧多添加了 --> 导致不平衡
+        // RR
+        if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0)
+            return leftRotate(node);
+        // c. 平衡因子大于1，&& 节点右侧多添加了 --> 导致不平衡
+        // LR
+        if (balanceFactor > 1 && getBalanceFactor(node.left) < 0) {
+            node.left = leftRotate(node.left);
             return rightRotate(node);
         }
-        // b. 平衡因子小于-1，&& 右侧的节点多添加了 --> 导致不平衡
-        if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
-            // 左旋转
+        // d. 平衡因子小于-1，&& 节点左侧多添加了 --> 导致不平衡
+        // RL
+        if (balanceFactor < -1 && getBalanceFactor(node.right) > 0) {
+            node.right = rightRotate(node.right);
             return leftRotate(node);
         }
+
         return node;
     }
 
@@ -159,12 +167,15 @@ public class AVLTree<K extends Comparable<K>, V> {
     private Node rightRotate(Node y) {
         Node x = y.left;
         Node t3 = x.right;
-        // 右旋转
+
+        // 向右旋转过程
         x.right = y;
         y.left = t3;
-        //更新height
-        y.height = Math.max((getHeight(y.left)), (getHeight(y.right))) + 1;
-        x.height = Math.max((getHeight(x.left)), (getHeight(x.right))) + 1;
+
+        // 更新height
+        y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
+        x.height = Math.max(getHeight(x.left), getHeight(x.right)) + 1;
+
         return x;
     }
 
@@ -178,11 +189,11 @@ public class AVLTree<K extends Comparable<K>, V> {
     //     T3 T4
     private Node leftRotate(Node y) {
         Node x = y.right;
-        Node T2 = x.left;
+        Node t2 = x.left;
 
         // 向左旋转过程
         x.left = y;
-        y.right = T2;
+        y.right = t2;
 
         // 更新height
         y.height = Math.max(getHeight(y.left), getHeight(y.right)) + 1;
@@ -257,46 +268,86 @@ public class AVLTree<K extends Comparable<K>, V> {
     }
 
     private Node remove(Node node, K key) {
-
-        if (node == null)
+        if( node == null )
             return null;
-
-        if (key.compareTo(node.key) < 0) {
-            node.left = remove(node.left, key);
-            return node;
-        } else if (key.compareTo(node.key) > 0) {
+        Node retNode;
+        if( key.compareTo(node.key) < 0 ){
+            node.left = remove(node.left , key);
+            // return node;
+            retNode = node;
+        }
+        else if(key.compareTo(node.key) > 0 ){
             node.right = remove(node.right, key);
-            return node;
-        } else {   // key.compareTo(node.key) == 0
+            // return node;
+            retNode = node;
+        }
+        else{   // key.compareTo(node.key) == 0
 
             // 待删除节点左子树为空的情况
-            if (node.left == null) {
+            if(node.left == null){
                 Node rightNode = node.right;
                 node.right = null;
-                size--;
-                return rightNode;
+                size --;
+                // return rightNode;
+                retNode = rightNode;
             }
 
             // 待删除节点右子树为空的情况
-            if (node.right == null) {
+            else if(node.right == null){
                 Node leftNode = node.left;
                 node.left = null;
-                size--;
-                return leftNode;
+                size --;
+                // return leftNode;
+                retNode = leftNode;
             }
 
             // 待删除节点左右子树均不为空的情况
+            else{
+                // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
+                // 用这个节点顶替待删除节点的位置
+                Node successor = minimum(node.right);
+                //successor.right = removeMin(node.right);
+                successor.right = remove(node.right, successor.key);
+                successor.left = node.left;
 
-            // 找到比待删除节点大的最小节点, 即待删除节点右子树的最小节点
-            // 用这个节点顶替待删除节点的位置
-            Node successor = minimum(node.right);
-            successor.right = removeMin(node.right);
-            successor.left = node.left;
+                node.left = node.right = null;
 
-            node.left = node.right = null;
-
-            return successor;
+                // return successor;
+                retNode = successor;
+            }
         }
+
+        if(retNode == null)
+            return null;
+
+        // 更新height
+        retNode.height = 1 + Math.max(getHeight(retNode.left), getHeight(retNode.right));
+
+        // 计算平衡因子
+        int balanceFactor = getBalanceFactor(retNode);
+
+        // 平衡维护
+        // LL
+        if (balanceFactor > 1 && getBalanceFactor(retNode.left) >= 0)
+            return rightRotate(retNode);
+
+        // RR
+        if (balanceFactor < -1 && getBalanceFactor(retNode.right) <= 0)
+            return leftRotate(retNode);
+
+        // LR
+        if (balanceFactor > 1 && getBalanceFactor(retNode.left) < 0) {
+            retNode.left = leftRotate(retNode.left);
+            return rightRotate(retNode);
+        }
+
+        // RL
+        if (balanceFactor < -1 && getBalanceFactor(retNode.right) > 0) {
+            retNode.right = rightRotate(retNode.right);
+            return leftRotate(retNode);
+        }
+
+        return retNode;
     }
 
     public static void main(String[] args) {

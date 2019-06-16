@@ -204,11 +204,16 @@ Author: G . M . Adelson-Velsky 和 E. M. Landis
     - 什么时候维护平衡
     ![avatar](src/avlTree/img/6.png) 
     ![avatar](src/avlTree/img/8.png) 
+    ![avatar](src/avlTree/img/10.png) 
+    ![avatar](src/avlTree/img/11.png) 
     - 平衡因子大于1，&& 左侧的节点多添加了 --> 导致不平衡 --> 右旋转
     ![avatar](src/avlTree/img/7.png)
     - 平衡因子小于-1，&& 右侧的节点多添加了 --> 导致不平衡 --> 左旋转
     ![avatar](src/avlTree/img/9.png)
-    
+    - 平衡因子大于1，&& 节点右侧多添加了 --> 导致不平衡 --> 左旋转 --> 右旋转
+    ![avatar](src/avlTree/img/10.png) 
+    - 平衡因子小于-1，&& 节点左侧多添加了 --> 导致不平衡 --> 右旋转 --> 左旋转
+    ![avatar](src/avlTree/img/11.png) 
     
 
 
