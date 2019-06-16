@@ -140,8 +140,8 @@ public class AVLTree<K extends Comparable<K>, V> {
             // 右旋转
             return rightRotate(node);
         }
-        // b. 平衡因子小于1，&& 右侧的节点多添加了 --> 导致不平衡
-        if (balanceFactor < 1 && getBalanceFactor(node.right) > 0) {
+        // b. 平衡因子小于-1，&& 右侧的节点多添加了 --> 导致不平衡
+        if (balanceFactor < -1 && getBalanceFactor(node.right) <= 0) {
             // 左旋转
             return leftRotate(node);
         }
