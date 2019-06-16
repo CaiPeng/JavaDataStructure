@@ -5,7 +5,7 @@ import file.FileOperation;
 import java.util.ArrayList;
 
 /**
- * AVL
+ * AVL 二分搜索树 增加平衡因子
  */
 public class AVLTree<K extends Comparable<K>, V> {
 
@@ -61,6 +61,30 @@ public class AVLTree<K extends Comparable<K>, V> {
         return getHeight(node.right) - getHeight(node.left);
     }
 
+    /**
+     * 判断当前树是否为二分搜索树
+     * <p>
+     * 中序遍历按顺序排列
+     */
+    public boolean isBSTree() {
+        ArrayList<K> keys = new ArrayList<>();
+        inOrder(root, keys);
+        for (int i = 1; i < keys.size(); i++) {
+            if (keys.get(i - 1).compareTo(keys.get(i)) > 0) { // 非升序遍历
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void inOrder(Node node, ArrayList<K> keys) {
+        if (node == null) {
+            return;
+        }
+        inOrder(node.left, keys);
+        keys.add(node.key);
+        inOrder(node.right, keys);
+    }
 
     // 向二分搜索树中添加新的元素(key, value)
     public void add(K key, V value) {
@@ -221,6 +245,7 @@ public class AVLTree<K extends Comparable<K>, V> {
             System.out.println("Total different words: " + map.getSize());
             System.out.println("Frequency of PRIDE: " + map.get("pride"));
             System.out.println("Frequency of PREJUDICE: " + map.get("prejudice"));
+            System.out.println("is BST " + map.isBSTree());
         }
 
         System.out.println();
